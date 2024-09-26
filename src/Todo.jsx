@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Button } from "@mui/material";
 import BasicModal from "./components/ModalComp";
 import OutlinedCard from "./components/CardComp";
+import DataGridDemo from "./components/DataGridTable";
 
 function Todo() {
   // State to control modal visibility
   const [open, setOpen] = useState(false);
 
-  // State to store input value
+  // State to store input value (for the modal)
   const [inputValue, setInputValue] = useState("");
 
   // State to store the list of tasks
@@ -29,7 +30,7 @@ function Todo() {
     } else {
       // Update the existing task
       const updatedTasks = [...task];
-      updatedTasks[updateIndex] = inputValue;
+      updatedTasks[updateIndex] = inputValue; // Update task with the new input
       setTask(updatedTasks);
       setUpdateIndex(null); // Reset update index after update
     }
@@ -76,6 +77,8 @@ function Todo() {
         handleRemove={handleRemove}
         handleUpdate={handleUpdate}
       />
+
+      <DataGridDemo />
     </>
   );
 }

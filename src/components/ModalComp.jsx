@@ -43,6 +43,7 @@ export default function BasicModal({
           variant="outlined"
           fullWidth
           onChange={handleInputChange} // Update the input value
+          defaultValue={inputValue}
           sx={{ mt: 2 }}
         />
         <Button
