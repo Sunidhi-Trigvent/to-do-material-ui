@@ -2,9 +2,12 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import GetData from "./GetData";
+import axios from "axios";
 
 export default function DataGridDemo() {
   const [rowsData, setRowsData] = React.useState([]);
+
+  //One way of doing it-
   //   const { getdata } = GetData();
 
   //   const obj = {
@@ -21,21 +24,43 @@ export default function DataGridDemo() {
   //     })();
   //   }, []);
 
+  //---------------------------------------------
+
+  //Second way of doing it-
+
   //fetch api
-  async function getdata() {
+  //   async function getdata() {
+  //     try {
+  //       let response = await fetch("https://api.restful-api.dev/objects");
+  //       let data = await response.json();
+  //       setRowsData(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   React.useEffect(() => {
+  //     getdata();
+  //   }, []);
+
+  //Third way to fetch by Axios-
+  const API = "https://api.restful-api.dev/objects";
+
+  async function getData() {
     try {
-      let response = await fetch("https://api.restful-api.dev/objects");
-      let data = await response.json();
-      setRowsData(data);
+      const response = await axios.get(API);
+      console.log(response);
+      setRowsData(response.data);
     } catch (error) {
       console.log(error);
     }
   }
 
   React.useEffect(() => {
-    getdata();
+    getData();
   }, []);
 
+  //datagrid columns
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {

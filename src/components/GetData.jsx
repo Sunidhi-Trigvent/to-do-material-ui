@@ -1,5 +1,6 @@
 // import React from "react";
 
+//One way of doing it
 // function GetData() {
 //   //fetch api
 //   async function getdata() {
