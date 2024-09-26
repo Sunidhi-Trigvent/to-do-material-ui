@@ -8,6 +8,7 @@ export default function DataGridDemo() {
   const [rowsData, setRowsData] = React.useState([]);
 
   //One way of doing it-
+  //destructuring
   //   const { getdata } = GetData();
 
   //   const obj = {
@@ -49,7 +50,7 @@ export default function DataGridDemo() {
   async function getData() {
     try {
       const response = await axios.get(API);
-      console.log(response);
+      //   console.log(response);
       setRowsData(response.data);
     } catch (error) {
       console.log(error);
