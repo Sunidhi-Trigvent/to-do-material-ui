@@ -5,7 +5,7 @@ import GetData from "./GetData";
 
 export default function DataGridDemo() {
   const [rowsData, setRowsData] = React.useState([]);
-  const { getdata } = GetData();
+  //   const { getdata } = GetData();
 
   //   const obj = {
   //     name: "tanish",
@@ -14,11 +14,26 @@ export default function DataGridDemo() {
 
   //   const { name, session } = obj;
 
-  React.useEffect(() => {
-    (async function () {
-      const data = await getdata();
+  //   React.useEffect(() => {
+  //     (async function () {
+  //       const data = await getdata();
+  //       setRowsData(data);
+  //     })();
+  //   }, []);
+
+  //fetch api
+  async function getdata() {
+    try {
+      let response = await fetch("https://api.restful-api.dev/objects");
+      let data = await response.json();
       setRowsData(data);
-    })();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  React.useEffect(() => {
+    getdata();
   }, []);
 
   const columns = [
@@ -49,10 +64,12 @@ export default function DataGridDemo() {
       headerName: "Capacity",
       width: 110,
       editable: false,
+      valueGetter: (value, row) =>
+        row?.data?.capacity ? row?.data?.capacity : "-",
     },
   ];
 
-  const rows = [];
+  //   const rows = [];
 
   return (
     <Box sx={{ height: 400, width: "100%" }}>
