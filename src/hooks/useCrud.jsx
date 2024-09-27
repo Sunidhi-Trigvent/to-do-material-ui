@@ -13,12 +13,19 @@ const useCrud = () => {
   // delete data
 
   const deleteData = async (id) => {
-    return (await request.delete(`/posts/${id}`)).data;
+    return await request.delete(`/posts/${id}`);
+  };
+
+  //add data
+
+  const postData = async (post) => {
+    return await request.post("/posts", post);
   };
 
   return {
     getData,
     deleteData,
+    postData,
   };
 };
 
