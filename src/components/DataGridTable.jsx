@@ -69,7 +69,7 @@ export default function DataGridDemo() {
   React.useEffect(() => {
     (async function () {
       const data = (await getPostData()).data;
-      console.log(data);
+      //console.log(data);
       setRowsData(data);
     })();
   }, []);
