@@ -1,12 +1,13 @@
-import React from "react";
-import { getPost } from "../api/PostApi";
+// import React from "react";
+// import { getPost } from "../api/PostApi";
 
-function Posts() {
-  async function getPostData() {
-    return await getPost();
-  }
+// function Posts() {
+//   async function getPostData() {
+//     return await getPost();
+//   }
 
-  return { getPostData };
-}
+//   return { getPostData };
+// }
 
-export default Posts;
+// export default Posts;
+export {};

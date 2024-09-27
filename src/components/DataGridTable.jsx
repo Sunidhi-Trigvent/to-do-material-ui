@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import GetData from "./GetData";
 import axios from "axios";
 import Posts from "./Posts";
+import useCrud from "../hooks/useCrud";
 
 export default function DataGridDemo() {
   const [rowsData, setRowsData] = React.useState([]);
@@ -64,11 +65,17 @@ export default function DataGridDemo() {
 
   //Fourth way (by creating axios instance)
   //destructuring
-  const { getPostData } = Posts();
+  // const { getPostData } = Posts();
+  const { getPost } = useCrud();
 
   React.useEffect(() => {
+    // (async function () {
+    //   const data = (await getPostData()).data;
+    //   //console.log(data);
+    //   setRowsData(data);
+    // })();
     (async function () {
-      const data = (await getPostData()).data;
+      const data = await getPost();
       //console.log(data);
       setRowsData(data);
     })();
