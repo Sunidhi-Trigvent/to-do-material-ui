@@ -4,14 +4,21 @@ import useAuth from "./useAuth";
 const useCrud = () => {
   const { request } = useAuth();
 
-  // get posts
+  // get data
 
-  const getPost = async () => {
+  const getData = async () => {
     return (await request.get("/posts")).data;
   };
 
+  // delete data
+
+  const deleteData = async (id) => {
+    return (await request.delete(`/posts/${id}`)).data;
+  };
+
   return {
-    getPost,
+    getData,
+    deleteData,
   };
 };
 
