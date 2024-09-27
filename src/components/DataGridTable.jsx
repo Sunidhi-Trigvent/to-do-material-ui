@@ -3,13 +3,10 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import GetData from "./GetData";
 import axios from "axios";
+import Posts from "./Posts";
 
 export default function DataGridDemo() {
   const [rowsData, setRowsData] = React.useState([]);
-
-  //One way of doing it-
-  //destructuring
-  //   const { getdata } = GetData();
 
   //   const obj = {
   //     name: "tanish",
@@ -17,6 +14,10 @@ export default function DataGridDemo() {
   //   };
 
   //   const { name, session } = obj;
+
+  //One way of doing it-
+  //destructuring
+  //   const { getdata } = GetData();
 
   //   React.useEffect(() => {
   //     (async function () {
@@ -45,53 +46,80 @@ export default function DataGridDemo() {
   //   }, []);
 
   //Third way to fetch by Axios-
-  const API = "https://api.restful-api.dev/objects";
+  // const API = "https://api.restful-api.dev/objects";
 
-  async function getData() {
-    try {
-      const response = await axios.get(API);
-      //   console.log(response);
-      setRowsData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function getData() {
+  //   try {
+  //     const response = await axios.get(API);
+  //     //   console.log(response);
+  //     setRowsData(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // React.useEffect(() => {
+  //   getData();
+  // }, []);
+
+  //Fourth way (by creating axios instance)
+  //destructuring
+  const { getPostData } = Posts();
 
   React.useEffect(() => {
-    getData();
+    (async function () {
+      const data = (await getPostData()).data;
+      console.log(data);
+      setRowsData(data);
+    })();
   }, []);
 
   //datagrid columns
   const columns = [
+    // { field: "id", headerName: "ID", width: 90 },
+    // {
+    //   field: "name",
+    //   headerName: "Name",
+    //   width: 250,
+    //   editable: false,
+    // },
+    // {
+    //   field: "price",
+    //   headerName: "Price",
+    //   type: Number,
+    //   width: 180,
+    //   editable: false,
+    //   valueGetter: (value, row) => (row?.data?.price ? row?.data?.price : "-"),
+    // },
+    // {
+    //   field: "color",
+    //   headerName: "color",
+    //   width: 200,
+    //   editable: false,
+    //   valueGetter: (value, row) => (row?.data?.color ? row?.data?.color : "-"),
+    // },
+    // {
+    //   field: "capacity",
+    //   headerName: "Capacity",
+    //   width: 110,
+    //   editable: false,
+    //   valueGetter: (value, row) =>
+    //     row?.data?.capacity ? row?.data?.capacity : "-",
+    // },
+
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "name",
-      headerName: "Name",
+      field: "title",
+      headerName: "Title",
       width: 250,
       editable: false,
     },
     {
-      field: "price",
-      headerName: "Price",
+      field: "body",
+      headerName: "Body",
       type: Number,
       width: 180,
       editable: false,
-      valueGetter: (value, row) => (row?.data?.price ? row?.data?.price : "-"),
-    },
-    {
-      field: "color",
-      headerName: "color",
-      width: 200,
-      editable: false,
-      valueGetter: (value, row) => (row?.data?.color ? row?.data?.color : "-"),
-    },
-    {
-      field: "capacity",
-      headerName: "Capacity",
-      width: 110,
-      editable: false,
-      valueGetter: (value, row) =>
-        row?.data?.capacity ? row?.data?.capacity : "-",
     },
   ];
 
